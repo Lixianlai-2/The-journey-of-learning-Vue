@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>非单文件组件</title>
+  </head>
+  <body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+      <app></app>
+    </div>
+
+    <script>
+      //   关闭生产提示
+      Vue.config.productionTip = false;
+
+      // 创建Student组件，下属于School组件
+      let Student = {
+        name: "uses",
+        template: `
+        <div>
+            <h1>学生：{{studentName}}</h1>
+            <h1>年龄：{{age}}</h1>
+          </div>
+        `,
+        data() {
+          return {
+            studentName: "李先来",
+            age: "28",
+          };
+        },
+      };
+
+      // 创建School组件
+      let school = Vue.extend({
+        // 不写el，因为这是vm决定的东西
+        // 要写html结构
+        template: `
+          <div>
+            <h1>学校：{{schoolName}}</h1>
+            <button @click="showName">点击我提示学校名</button>
+            <Student></Student>
+          </div>
+        `,
+        // 要写data，但要用函数形式
+        data: function () {
+          return {
+            schoolName: "四川大学",
+          };
+        },
+        methods: {
+          showName() {
+            alert(this.schoolName);
+          },
+        },
+        components: { Student },
+      });
+
+      // 创建School的同级组件location
+      let address = {
+        template: `
+          <h1>{{address}}</h1>
+        `,
+        data() {
+          return {
+            address: "绵阳",
+          };
+        },
+      };
+
+      // 创建领导所有组件的组件app
+      let app = {
+        template: `
+        <div>
+            <school></school>
+            <location></location>
+          </div>
+        `,
+        components: {
+          school,
+          location: address,
+        },
+      };
+
+      // 创建Vue的实例对象vm
+      new Vue({
+        name: "first",
+        el: "#root",
+        // 注册其他组件
+        components: {
+          app,
+        },
+      });
+    </script>
+  </body>
+</html>

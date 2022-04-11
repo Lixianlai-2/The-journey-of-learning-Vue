@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>非单文件组件</title>
+  </head>
+  <body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+      <school></school>
+    </div>
+
+    <script>
+      //   关闭生产提示
+      Vue.config.productionTip = false;
+
+      // 创建School组件
+      let school = Vue.extend({
+        // 不写el，因为这是vm决定的东西
+        // 要写html结构
+        template: `
+          <div>
+            <h1>学校：{{schoolName}}</h1>
+          </div>
+        `,
+        // 要写data，但要用函数形式
+        data: function () {
+          return {
+            schoolName: "四川大学",
+          };
+        },
+      });
+
+      // 创造一个构造函数Demo（构造函数首字母是大写的)
+      const Demo = function () {
+        this.a = "1";
+        this.b = "2";
+      };
+
+      // 构造函数的prototype原型对象
+      console.log(Demo.prototype);
+      console.log("#", Demo.__proto__ === Function.prototype); // true
+
+      // 创造Demo的实例对象
+      const demoInstance = new Demo();
+
+      // 实例对象的原型 === 其构造函数的prototype
+      console.log(demoInstance.__proto__ === Demo.prototype); // true
+
+      // 创建Vue的实例对象vm
+      new Vue({
+        el: "#root",
+        // 注册其他组件
+        components: {
+          // school:school 简写为school
+          school,
+        },
+      });
+    </script>
+  </body>
+</html>
