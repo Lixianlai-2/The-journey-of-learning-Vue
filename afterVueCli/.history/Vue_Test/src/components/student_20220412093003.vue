@@ -19,8 +19,7 @@ export default {
   },
   methods: {
     showName() {
-      // 注意要调用，这里是使用Vue原型上的方法
-      this.hello();
+      this.hello;
     },
   },
 };

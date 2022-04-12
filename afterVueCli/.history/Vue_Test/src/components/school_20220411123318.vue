@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>学校名称：{{ name }}</h1>
-    <!-- <button @click="showName">点击弹出学生名字</button> -->
+    <button @click="showname">点击弹出学生名字</button>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
     return {
       name: "四川大学",
     };
+  },
+  methods: {
+    showname() {
+      alert(this.name);
+    },
   },
 };
 </script>

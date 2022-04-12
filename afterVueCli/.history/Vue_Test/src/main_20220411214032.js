@@ -1,10 +1,8 @@
 import Vue from "vue";
 import App from "./App.vue";
-import plugins from "./plugins";
+import { mixin } from "./mixin";
+Vue.mixin(mixin);
 
-// 使用插件
-Vue.use(plugins, 1, 2, 3);
-// 关闭生产模式提醒
 Vue.config.productionTip = false;
 
 new Vue({
