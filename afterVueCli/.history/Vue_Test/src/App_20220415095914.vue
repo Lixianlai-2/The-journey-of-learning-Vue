@@ -3,7 +3,7 @@
     <div class="root">
       <div class="todo-container">
         <div class="todo-wrap">
-          <myHeader :receive="receiveFn" />
+          <myHeader />
           <!-- 引入data中的数据 -->
           <myList :toDos="toDos" />
           <myFooter />
@@ -33,14 +33,6 @@ export default {
         { id: "003", eventName: "听音乐", done: false },
       ],
     };
-  },
-  methods: {
-    receiveFn(inputTodoObj) {
-      // 等待传入的对象
-      console.log(inputTodoObj);
-      console.log("app.vue中的this:", this);
-      console.log(this.toDos.unshift(inputTodoObj));
-    },
   },
 };
 </script>

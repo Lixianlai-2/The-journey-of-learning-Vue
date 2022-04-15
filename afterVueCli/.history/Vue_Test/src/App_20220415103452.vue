@@ -36,10 +36,9 @@ export default {
   },
   methods: {
     receiveFn(inputTodoObj) {
-      // 等待传入的对象
       console.log(inputTodoObj);
-      console.log("app.vue中的this:", this);
-      console.log(this.toDos.unshift(inputTodoObj));
+      console.log("@@", this);
+      console.log(this.toDos);
     },
   },
 };

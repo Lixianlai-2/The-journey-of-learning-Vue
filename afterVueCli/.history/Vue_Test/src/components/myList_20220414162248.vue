@@ -1,0 +1,23 @@
+<template>
+  <div class="items">
+    <h1>你好</h1>
+    <myItem />
+  </div>
+</template>
+
+<script>
+import myItem from "./myItem.vue";
+
+export default {
+  name: "List",
+  components: {
+    myItem,
+  },
+};
+</script>
+
+<style scoped>
+.items {
+  background-color: rgb(21, 95, 37);
+}
+</style>
