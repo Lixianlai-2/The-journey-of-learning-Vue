@@ -3,7 +3,7 @@
     <div class="root">
       <div class="todo-container">
         <div class="todo-wrap">
-          <myHeader :receive="receiveFn" />
+          <myHeader :receiveInputObj="receiveFn" />
           <!-- 引入data中的数据 -->
           <myList :toDos="toDos" />
           <myFooter />
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     receiveFn(inputTodoObj) {
-      // 等待传入的对象
+      // 这个对象是由Header中提供的，因为是在header中调用的这个函数
       console.log(inputTodoObj);
       console.log("app.vue中的this:", this);
       console.log(this.toDos.unshift(inputTodoObj));

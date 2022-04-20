@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="todo-header">
+      <!-- 增加键盘事件，对input的内容按下enter后 -->
       <input
         type="text"
         placeholder="请输入你的任务，按回车键确认"
@@ -17,20 +18,24 @@ export default {
   name: "Header",
   methods: {
     add(event) {
+      // 判断input中输入的布尔值是否为false，如果是，就return
+      if (!event.target.value.trim()) {
+        alert("请输入具体任务");
+        return;
+      }
+      // 得到用户输入所形成的数据对象，其中的done是代表这件事是否完成
       const todoObj = {
         id: nanoid(),
         eventName: event.target.value,
         done: false,
       };
       console.log("header中的this:", this);
-      // 调用receive时，相当于还是在app.vue里面调用，所以也是在app.vue里面找toDos的数据
-      this.receive(todoObj);
-      console.dir(this.receive);
-      return todoObj;
+      // 在这里调用receive函数的作用，就是获得header中的todoObj对象，也就是用户刚刚传入的对象。这header中的数据对象被传入到receive函数中，而这个函数的作用，是往app.vue中的toDos数据对象中添加内容
+      this.receiveInputObj(todoObj);
     },
   },
-  // 引入的父级数据，会出现在vc（组件实例对象）上
-  props: ["receive"],
+  // 引入的父级函数
+  props: ["receiveInputObj"],
 };
 </script>
 
