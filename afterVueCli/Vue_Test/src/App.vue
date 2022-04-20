@@ -27,6 +27,7 @@ export default {
   },
   data() {
     return {
+      // 这是要被list.vue得到并进行渲染的数据
       toDos: [
         { id: "001", eventName: "敲代码", done: true },
         { id: "002", eventName: "喝茶", done: true },
