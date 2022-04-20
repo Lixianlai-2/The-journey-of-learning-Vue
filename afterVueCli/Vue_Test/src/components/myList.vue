@@ -5,6 +5,8 @@
       :key="todo.id"
       :eventName="todo.eventName"
       :checked="todo.done"
+      :todoId="todo.id"
+      :checkTodo="checkTodo"
     />
   </ul>
 </template>
@@ -17,7 +19,7 @@ export default {
   components: {
     myItem,
   },
-  props: ["toDos"],
+  props: ["toDos", "checkTodo"],
 };
 </script>
 

@@ -2,7 +2,11 @@
   <div>
     <li>
       <label>
-        <input type="checkbox" :checked="checked" />
+        <input
+          type="checkbox"
+          :checked="checked"
+          @click="checkHandle(todoId)"
+        />
         <span>{{ eventName }}</span>
       </label>
       <!-- 隐藏删除按钮 -->
@@ -14,7 +18,15 @@
 <script>
 export default {
   name: "Item",
-  props: ["eventName", "checked"],
+  props: ["eventName", "checked", "todoId", "checkTodo"],
+  methods: {
+    add() {},
+    checkHandle(clickId) {
+      console.log(this);
+      console.log("checkHandle的参数 " + clickId);
+      this.checkTodo(clickId);
+    },
+  },
 };
 </script>
 

@@ -5,7 +5,7 @@
         <div class="todo-wrap">
           <myHeader :receiveInputObj="receiveFn" />
           <!-- 引入data中的数据 -->
-          <myList :toDos="toDos" />
+          <myList :toDos="toDos" :checkTodo="checkTodo" />
           <myFooter />
         </div>
       </div>
@@ -36,11 +36,19 @@ export default {
     };
   },
   methods: {
+    // 接受一个todo对象，并添加到原有数据中
     receiveFn(inputTodoObj) {
       // 这个对象是由Header中提供的，因为是在header中调用的这个函数
-      console.log(inputTodoObj);
-      console.log("app.vue中的this:", this);
       console.log(this.toDos.unshift(inputTodoObj));
+    },
+    // 将用户点击的input的done值取反
+    checkTodo(clickId) {
+      this.toDos.forEach((todo) => {
+        // 当遍历的id等于用户点击的那个id，就给对应todo的done值取反
+        if (todo.id === clickId) todo.done = !todo.done;
+        console.log(todo);
+      });
+      console.log(this.toDos);
     },
   },
 };
