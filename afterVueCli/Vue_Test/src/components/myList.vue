@@ -8,6 +8,7 @@
       :todoId="todo.id"
       :checkTodo="checkTodo"
       :todo="todo"
+      :deleteTodo="deleteTodo"
     />
   </ul>
 </template>
@@ -20,7 +21,7 @@ export default {
   components: {
     myItem,
   },
-  props: ["toDos", "checkTodo"],
+  props: ["toDos", "checkTodo", "deleteTodo"],
 };
 </script>
 

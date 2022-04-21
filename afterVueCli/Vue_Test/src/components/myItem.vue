@@ -2,6 +2,7 @@
   <div>
     <li>
       <label>
+        <!-- 获取到点击的那个input的id -->
         <input
           type="checkbox"
           :checked="checked"
@@ -12,7 +13,9 @@
         <span>{{ eventName }}</span>
       </label>
       <!-- 隐藏删除按钮 -->
-      <button class="btn btn-danger" style="display: none">删除</button>
+      <button class="btn btn-danger" @click="deleteHandler(todo.id)">
+        删除
+      </button>
     </li>
   </div>
 </template>
@@ -20,13 +23,20 @@
 <script>
 export default {
   name: "Item",
-  props: ["eventName", "checked", "todoId", "checkTodo", "todo"],
+  props: ["eventName", "checked", "todoId", "checkTodo", "todo", "deleteTodo"],
   methods: {
     add() {},
     checkHandle(clickId) {
       console.log(this);
       console.log("checkHandle的参数 " + clickId);
+      //
       this.checkTodo(clickId);
+    },
+    deleteHandler(btnId) {
+      console.log(btnId);
+      if (confirm("确定删除吗？")) {
+        this.deleteTodo(btnId);
+      }
     },
   },
 };

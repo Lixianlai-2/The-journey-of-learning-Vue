@@ -5,7 +5,11 @@
         <div class="todo-wrap">
           <myHeader :receiveInputObj="receiveFn" />
           <!-- 引入data中的数据 -->
-          <myList :toDos="toDos" :checkTodo="checkTodo" />
+          <myList
+            :toDos="toDos"
+            :checkTodo="checkTodo"
+            :deleteTodo="deleteTodo"
+          />
           <myFooter />
         </div>
       </div>
@@ -36,11 +40,14 @@ export default {
     };
   },
   methods: {
-    // 接受一个todo对象，并添加到原有数据中
+    //添加一个todo
+    //接受一个todo对象，并添加到原有数据中
     receiveFn(inputTodoObj) {
       // 这个对象是由Header中提供的，因为是在header中调用的这个函数
-      console.log(this.toDos.unshift(inputTodoObj));
+      this.toDos.unshift(inputTodoObj);
     },
+
+    // 勾选一个todo
     // 将用户点击的input的done值取反
     checkTodo(clickId) {
       this.toDos.forEach((todo) => {
@@ -49,6 +56,12 @@ export default {
         console.log(todo);
       });
       console.log(this.toDos);
+    },
+
+    // 删除一个todo
+    deleteTodo(btnId) {
+      // 注意使用的是filter，返回一个数组，不改变原数组，所以要将其结果重新赋值给this.toDos
+      this.toDos = this.toDos.filter((todo) => todo.id !== btnId);
     },
   },
 };
