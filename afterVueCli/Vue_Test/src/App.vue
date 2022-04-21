@@ -10,7 +10,7 @@
             :checkTodo="checkTodo"
             :deleteTodo="deleteTodo"
           />
-          <myFooter />
+          <myFooter :toDos="toDos" />
         </div>
       </div>
     </div>
@@ -53,7 +53,6 @@ export default {
       this.toDos.forEach((todo) => {
         // 当遍历的id等于用户点击的那个id，就给对应todo的done值取反
         if (todo.id === clickId) todo.done = !todo.done;
-        console.log(todo);
       });
       console.log(this.toDos);
     },

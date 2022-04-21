@@ -3,7 +3,9 @@
     <label>
       <input type="checkbox" />
     </label>
-    <span> <span>已完成0</span> / 全部2 </span>
+    <span>
+      <span>已完成{{ doneTotal }}</span> / 全部{{ toDos.length }}</span
+    >
     <button class="btn btn-danger">清除全部任务</button>
   </div>
 </template>
@@ -11,6 +13,29 @@
 <script>
 export default {
   name: "Footer",
+  // 引入app.vue中的数据
+  props: ["toDos"],
+  // 这里面的函数会自动执行
+  computed: {
+    doneTotal() {
+      // 一、普通的方法
+      // let i = 0;
+      // this.toDos.forEach((todo) => {
+      //   // 如果todo.done为true
+      //   if (todo.done) {
+      //     i++;
+      //   }
+      // });
+      // return i;
+
+      // 二、用reduce
+      return this.toDos.reduce(
+        // pre是reduce里面的callback函数的返回值（第一个为设定的初始值或array[0]
+        (pre, currentEl) => pre + (currentEl.done ? 1 : 0),
+        0
+      );
+    },
+  },
 };
 </script>
 
