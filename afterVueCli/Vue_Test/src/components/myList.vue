@@ -7,6 +7,7 @@
       :checked="todo.done"
       :todoId="todo.id"
       :checkTodo="checkTodo"
+      :todo="todo"
     />
   </ul>
 </template>

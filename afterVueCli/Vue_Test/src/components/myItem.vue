@@ -7,6 +7,8 @@
           :checked="checked"
           @click="checkHandle(todoId)"
         />
+        <!--下面这种也能用，但不推荐，因为修改了原本只读的props，因为隐藏在对象中，所以才能够使用  -->
+        <!-- <input type="checkbox" :checked="checked" v-model="todo.done" /> -->
         <span>{{ eventName }}</span>
       </label>
       <!-- 隐藏删除按钮 -->
@@ -18,7 +20,7 @@
 <script>
 export default {
   name: "Item",
-  props: ["eventName", "checked", "todoId", "checkTodo"],
+  props: ["eventName", "checked", "todoId", "checkTodo", "todo"],
   methods: {
     add() {},
     checkHandle(clickId) {
