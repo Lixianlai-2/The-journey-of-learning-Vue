@@ -35,12 +35,16 @@ export default {
   },
   data() {
     return {
-      // 这是要被list.vue得到并进行渲染的数据
-      toDos: [
-        { id: "001", eventName: "敲代码", done: true },
-        { id: "002", eventName: "喝茶", done: true },
-        { id: "003", eventName: "听音乐", done: false },
-      ],
+      // 由于toDos是myHeader和myFooter组件都在使用，所以放在App.vue中
+
+      // 从localStorage中得到数据，并将其从JSON转化为原本的内容
+      toDos: JSON.parse(localStorage.getItem("toDos")) || [], // 这里之所以用|| [] 是因为刚打开页面时，toDos没有数据，是null， 而null身上没有length属性，会在footer.vue上报错
+
+      // 原来设置的数据 [
+      // { id: "001", eventName: "敲代码", done: true },
+      // { id: "002", eventName: "喝茶", done: true },
+      // { id: "003", eventName: "听音乐", done: false },
+      // ],
     };
   },
   methods: {
@@ -81,6 +85,21 @@ export default {
       this.toDos = this.toDos.filter((todo) => {
         return todo.done !== true;
       });
+    },
+  },
+  watch: {
+    // 缩写后的浅层监视，只检测到第一层数组层
+    // toDos(value) {
+    //   // 设置
+    //   localStorage.setItem("toDos", JSON.stringify(value));
+    // },
+
+    // watch的深度监视，这样数组中的done值改变了也能检测到
+    toDos: {
+      deep: true,
+      handler(value) {
+        localStorage.setItem("toDos", JSON.stringify(value));
+      },
     },
   },
 };
