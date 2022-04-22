@@ -1,12 +1,15 @@
 <template>
-  <div class="todo-footer">
+  <div class="todo-footer" v-show="allQuestNum">
     <label>
-      <input type="checkbox" />
+      <!-- <input type="checkbox" :checked="equalOrNot" @change="checkQuest" /> -->
+
+      <!-- v-model是双向数据绑定 -->
+      <input type="checkbox" v-model="equalOrNot" />
     </label>
     <span>
-      <span>已完成{{ doneTotal }}</span> / 全部{{ toDos.length }}</span
+      <span>已完成{{ alreadyDone }}</span> / 全部{{ allQuestNum }}</span
     >
-    <button class="btn btn-danger">清除全部任务</button>
+    <button class="btn btn-danger" @click="clearQuest">清除已完成任务</button>
   </div>
 </template>
 
@@ -14,10 +17,11 @@
 export default {
   name: "Footer",
   // 引入app.vue中的数据
-  props: ["toDos"],
+  props: ["toDos", "changeTodoDone", "clearAlreadyDone"],
   // 这里面的函数会自动执行
   computed: {
-    doneTotal() {
+    // 计算已完成任务的数量
+    alreadyDone() {
       // 一、普通的方法
       // let i = 0;
       // this.toDos.forEach((todo) => {
@@ -34,6 +38,36 @@ export default {
         (pre, currentEl) => pre + (currentEl.done ? 1 : 0),
         0
       );
+    },
+    // 当前所有的任务数量
+    allQuestNum() {
+      return this.toDos.length;
+    },
+    // equalOrNot() {
+    //   return this.alreadyDone === this.allQuestNum && this.allQuestNum > 0;
+    // },
+    equalOrNot: {
+      get() {
+        return this.alreadyDone === this.allQuestNum && this.allQuestNum > 0;
+      },
+      // set的参数只会是布尔值
+      set(value) {
+        this.changeTodoDone(value);
+      },
+    },
+  },
+  methods: {
+    checkQuest(e) {
+      // event事件
+      // console.log(e);
+
+      // 查看这个input是否checked
+      // console.log(e.target.checked);
+
+      this.changeTodoDone(e.target.checked);
+    },
+    clearQuest() {
+      this.clearAlreadyDone();
     },
   },
 };

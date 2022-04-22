@@ -10,7 +10,11 @@
             :checkTodo="checkTodo"
             :deleteTodo="deleteTodo"
           />
-          <myFooter :toDos="toDos" />
+          <myFooter
+            :toDos="toDos"
+            :changeTodoDone="changeTodoDone"
+            :clearAlreadyDone="clearAlreadyDone"
+          />
         </div>
       </div>
     </div>
@@ -61,6 +65,22 @@ export default {
     deleteTodo(btnId) {
       // 注意使用的是filter，返回一个数组，不改变原数组，所以要将其结果重新赋值给this.toDos
       this.toDos = this.toDos.filter((todo) => todo.id !== btnId);
+    },
+
+    // 让任务全部完成，或者让任务全部取消
+    // 让所有的todo的done值都改变为true
+    changeTodoDone(doneStatus) {
+      this.toDos.forEach((todo) => {
+        todo.done = doneStatus;
+        // todo.done === doneStatus;
+      });
+    },
+
+    // 清除已完成的任务
+    clearAlreadyDone() {
+      this.toDos = this.toDos.filter((todo) => {
+        return todo.done !== true;
+      });
     },
   },
 };
