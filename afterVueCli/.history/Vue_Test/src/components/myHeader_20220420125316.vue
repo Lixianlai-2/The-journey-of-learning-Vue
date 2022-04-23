@@ -19,13 +19,11 @@ export default {
   name: "Header",
   data() {
     return {
-      // 跟v-model对应的数据
-      eventName: "",
+      title: "",
     };
   },
   methods: {
     add() {
-      console.log(this);
       // 得到用户输入的字符串，然后用trim()将这个字符串周围的空格都删除
       // 再判断input中输入的布尔值是否为false，如果是，就return
       if (!this.eventName.trim()) {
@@ -40,11 +38,11 @@ export default {
         // eventName: event.target.value,
         done: false,
       };
-
+      console.log("header中的this:", this);
       // 在这里调用receive函数的作用，就是获得header中的todoObj对象，也就是用户刚刚传入的对象。这header中的数据对象被传入到receive函数中，而这个函数的作用，是往app.vue中的toDos数据对象中添加内容
       this.receiveInputObj(todoObj);
       // 输入完之后，输入框重新变成空
-      this.eventName = "";
+      this.title = "";
     },
   },
   // 引入的父级函数

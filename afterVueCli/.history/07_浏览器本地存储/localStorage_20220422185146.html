@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>localStorage</title>
+  </head>
+  <body>
+    <h1>localStorage</h1>
+    <button onclick="saveStorage()">点击保存localStorage</button>
+    <button onclick="getStorage()">点击读取localStorage</button>
+    <button onclick="deleteStorage()">点击删除localStorage</button>
+    <button onclick="clearAllStorage()">点击删除localStorage</button>
+
+    <script>
+      // 保存本地数据
+      function saveStorage() {
+        alert("运行了吗");
+        window.localStorage.setItem("num", "1,2,3");
+        // 可以不加window，相同key，下面的会覆盖上面的
+        localStorage.setItem("num", "4,5,6");
+        localStorage.setItem("num2", "7,8,9");
+
+        // 存储一个对象，要用JSON.stringify
+        localStorage.setItem(
+          "obj",
+          JSON.stringify({ id: "001", eventName: "敲代码" })
+        );
+      }
+
+      // 得到本地数据
+      function getStorage() {
+        console.log(localStorage.getItem("num"));
+        console.log(localStorage.getItem("num2"));
+        //
+        console.log(localStorage.getItem("num3"));
+
+        // 读取一个字符串对象，要将其转化为真正的对象
+        console.log(JSON.parse(localStorage.getItem("obj")));
+      }
+
+      // 删除本地数据
+      function deleteStorage() {
+        localStorage.removeItem("num");
+      }
+
+      // 情况本地数据
+      function clearAllStorage() {
+        localStorage.clear();
+      }
+    </script>
+  </body>
+</html>
