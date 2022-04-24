@@ -6,7 +6,7 @@
 
     <!-- 通过父组件给子组件绑定一个自定义事件实现子向父传递数据 -->
     <!-- 在student组件的实例对象上创造一个自定义事件userDefineEvent -->
-    <!-- <student @userDefineEvent.once="getStudentName" /> -->
+    <student @userDefineEvent.once="getStudentName" />
 
     <!-- 通过父组件给子组件绑定一个自定义事件实现子向父传递数据 -->
     <!-- 通过this.$refs.student得到student组件的实例对象 -->
@@ -33,16 +33,14 @@ export default {
     getSchoolName(schoolName) {
       console.log(schoolName);
     },
-    // getStudentName(studentName, ...arr) {
-    getStudentName(studentName, arr) {
-      console.log(studentName, arr);
+    getStudentName(studentName, secondProperty) {
+      console.log(studentName, secondProperty);
     },
   },
   // mounted写在哪个组件里面，哪个组件就挂载完毕
   mounted() {
     // 挂载完后，通过ref找到student组件的实例对象，为其创建时间，并赋予方法
-    this.$refs.student.$on("userDefineEvent", this.getStudentName); //绑定自定义事件
-    // this.$refs.student.$once("userDefineEvent", this.getStudentName); //绑定自定义事件（一次性）
+    this.$refs.student.$once("userDefineEvent", this.getStudentName);
   },
 };
 </script>

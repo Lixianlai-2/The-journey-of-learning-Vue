@@ -33,8 +33,7 @@ export default {
     getSchoolName(schoolName) {
       console.log(schoolName);
     },
-    // getStudentName(studentName, ...arr) {
-    getStudentName(studentName, arr) {
+    getStudentName(studentName, ...arr) {
       console.log(studentName, arr);
     },
   },

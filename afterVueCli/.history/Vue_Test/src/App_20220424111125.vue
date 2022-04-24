@@ -33,16 +33,14 @@ export default {
     getSchoolName(schoolName) {
       console.log(schoolName);
     },
-    // getStudentName(studentName, ...arr) {
-    getStudentName(studentName, arr) {
-      console.log(studentName, arr);
+    getStudentName(studentName, secondProperty) {
+      console.log(studentName, secondProperty);
     },
   },
   // mounted写在哪个组件里面，哪个组件就挂载完毕
   mounted() {
     // 挂载完后，通过ref找到student组件的实例对象，为其创建时间，并赋予方法
-    this.$refs.student.$on("userDefineEvent", this.getStudentName); //绑定自定义事件
-    // this.$refs.student.$once("userDefineEvent", this.getStudentName); //绑定自定义事件（一次性）
+    this.$refs.student.$once("userDefineEvent", this.getStudentName);
   },
 };
 </script>

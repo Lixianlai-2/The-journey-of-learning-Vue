@@ -33,9 +33,8 @@ export default {
     getSchoolName(schoolName) {
       console.log(schoolName);
     },
-    // getStudentName(studentName, ...arr) {
-    getStudentName(studentName, arr) {
-      console.log(studentName, arr);
+    getStudentName(studentName, ...arr) {
+      console.log(studentName, secondProperty);
     },
   },
   // mounted写在哪个组件里面，哪个组件就挂载完毕
