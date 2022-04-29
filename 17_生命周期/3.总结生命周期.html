@@ -10,8 +10,9 @@
   </head>
   <body>
     <div id="root">
-      <h1 v-if="boolean">你好吗</h1>
       <h2 :style="{opacity:transparency}">来学习Vue吧!</h2>
+      <!-- <button @click="clearTimer">点击我清除定时器</button> -->
+      <button @click="destroyVm">点击我销毁vm</button>
     </div>
 
     <script>
@@ -22,27 +23,31 @@
         data() {
           return {
             transparency: 1,
-            boolean: false,
           };
+        },
+        methods: {
+          destroyVm() {
+            this.$destroy();
+          },
+
+          //   clearTimer() {
+          //     clearInterval(this.timer);
+          //   },
         },
         // Vue完成模板的解析，并把初始的真实DOM元素放入页面后（挂载完毕），调用mounted
         mounted() {
-          setInterval(() => {
+          this.timer = setInterval(() => {
+            console.log("定时器运行了");
             this.transparency -= 0.01;
             if (this.transparency <= 0) {
               this.transparency = 1;
             }
           }, 16);
         },
+        beforeDestroy() {
+          clearInterval(this.timer);
+        },
       });
-
-      //   setInterval(() => {
-      //     vm.transparency -= 0.01;
-      //     console.log("SetInterVal works!");
-      //     if (vm.transparency <= 0) {
-      //       vm.transparency = 1;
-      //     }
-      //   }, 16);
     </script>
   </body>
 </html>

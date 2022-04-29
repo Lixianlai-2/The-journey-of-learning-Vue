@@ -59,6 +59,8 @@ export default {
         if (todo.id === clickId) todo.done = !todo.done;
       });
       console.log(this.toDos);
+      if (clickId === true) {
+      }
     },
 
     // 删除一个todo

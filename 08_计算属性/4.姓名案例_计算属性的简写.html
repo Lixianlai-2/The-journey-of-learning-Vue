@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 引入完整Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>姓名案例methods实现</title>
+  </head>
+  <body>
+    <div id="root">
+      姓:<input type="text" v-model:value="firstName" />
+      <br />
+
+      <!-- v-model的简写，省略value -->
+      名:<input type="text" v-model="lastName" />
+      <br />
+
+      全名：<span>{{fullName}}</span>
+    </div>
+
+    <script>
+      Vue.config.productionTip = false;
+
+      const vm = new Vue({
+        el: "#root",
+        data() {
+          return {
+            firstName: "李",
+            lastName: "先来",
+          };
+        },
+
+        computed: {
+          // 完整写法
+          // fullName: {
+          //   // 当有人读取fullName时，get会被调用，且返回值作为fullName的值
+          //   // get什么时候调用？1.初次读取fullName时 2.当所以来的数据发生变化时
+          //   get() {
+          //     console.log(this);
+          //     return this.firstName + "^" + this.lastName;
+          //   },
+          //   // 把计算属性改成什么，参数就是什么
+          //   set(value) {
+          //     //  将输入的值通过^分隔为一个数组中的两个部分，比如  李^四 变化为 ['李','四']
+          //     const arr = value.split("^");
+          //     // 然后分别读取数组中的内容即可
+          //     this.firstName = arr[0];
+          //     this.lastName = arr[1];
+          //   },
+          // },
+          fullName() {
+            console.log(this);
+            return this.firstName + "·" + this.lastName;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
