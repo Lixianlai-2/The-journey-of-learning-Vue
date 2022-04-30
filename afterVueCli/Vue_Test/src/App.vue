@@ -4,13 +4,11 @@
     <!-- 通过父组件给子组件传递函数类型的props实现子向父传递数据 -->
     <school :getSchoolName="getSchoolName" />
 
-    <!-- 通过父组件给子组件绑定一个自定义事件实现子向父传递数据 -->
-    <!-- 在student组件的实例对象上创造一个自定义事件userDefineEvent -->
-    <!-- <student @userDefineEvent.once="getStudentName" /> -->
+    <!-- 通过父组件给子组件绑定一个自定义事件：使用@或v-on 实现子向父传递数据：在student组件的实例对象上创造一个自定义事件userDefineEvent -->
+    <!-- <student @userDefineEvent="getStudentName" /> -->
 
-    <!-- 通过父组件给子组件绑定一个自定义事件实现子向父传递数据 -->
-    <!-- 通过this.$refs.student得到student组件的实例对象 -->
-    <student ref="student" />
+    <!-- 通过父组件给子组件绑定一个自定义事件：实现子向父传递数据 -->
+    <student ref="student" @userDefinedEvent2="userFn" />
   </div>
 </template>
 
@@ -36,6 +34,11 @@ export default {
     // getStudentName(studentName, ...arr) {
     getStudentName(studentName, arr) {
       console.log(studentName, arr);
+      console.log("触发了绑定的第一个事件");
+    },
+    userFn() {
+      // alert("触发了绑定的第二个自定义事件");
+      console.log("触发了绑定的第一二事件");
     },
   },
   // mounted写在哪个组件里面，哪个组件就挂载完毕
