@@ -1,64 +1,48 @@
 <template>
-  <div id="app">
-    <h2 class="hello">{{ msg }}</h2>
-    <!-- 通过父组件给子组件传递函数类型的props实现子向父传递数据 -->
-    <school :getSchoolName="getSchoolName" />
+  <div>
+    <div class="row">
+      <Banner />
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <div class="list-group">
+          <!-- 原始html中我们使用a标签实现页面的跳转 -->
+          <!-- <a class="list-group-item active" href="./about.html">About</a> -->
+          <!-- <a class="list-group-item" href="./home.html">Home</a> -->
 
-    <!-- 通过父组件给子组件绑定一个自定义事件：使用@或v-on 实现子向父传递数据：在student组件的实例对象上创造一个自定义事件userDefineEvent -->
-    <!-- <student @userDefineEvent="getStudentName" /> -->
-
-    <!-- 通过父组件给子组件绑定一个自定义事件：实现子向父传递数据 -->
-    <student ref="student" @userDefinedEvent2="userFn" />
+          <!-- Vue中借助router-link标签实现路由的切换 -->
+          <router-link
+            :replace="true"
+            class="list-group-item"
+            active-class="active"
+            to="/about"
+            >About</router-link
+          >
+          <router-link
+            :replace="true"
+            class="list-group-item"
+            active-class="active"
+            to="/home"
+            >Home</router-link
+          >
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="panel">
+          <div class="panel-body">
+            <!-- 指定组件的呈现位置 -->
+            <router-view></router-view>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import School from "./components/school.vue";
-import student from "./components/student.vue";
-
+import Banner from "./components/Banner.vue";
 export default {
   name: "App",
-  components: {
-    student,
-    School,
-  },
-  data() {
-    return {
-      msg: "我正在自学前端技术",
-    };
-  },
-  methods: {
-    getSchoolName(schoolName) {
-      console.log(schoolName);
-    },
-    // getStudentName(studentName, ...arr) {
-    getStudentName(studentName, arr) {
-      console.log(studentName, arr);
-      console.log("触发了绑定的第一个事件");
-    },
-    userFn() {
-      // alert("触发了绑定的第二个自定义事件");
-      console.log("触发了绑定的第一二事件");
-    },
-  },
-  // mounted写在哪个组件里面，哪个组件就挂载完毕
-  mounted() {
-    // 挂载完后，通过ref找到student组件的实例对象，为其创建时间，并赋予方法
-    this.$refs.student.$on("userDefineEvent", this.getStudentName); //绑定自定义事件
-    // this.$refs.student.$once("userDefineEvent", this.getStudentName); //绑定自定义事件（一次性）
-  },
+  components: { Banner },
 };
 </script>
-
-<style lang="less">
-#app {
-  border: 1px solid black;
-  background-color: gray;
-  padding: 10px 2px;
-  .hello {
-    border: 1px solid blue;
-    background-color: rgb(71, 180, 226);
-    margin-bottom: 20px;
-  }
-}
-</style>
