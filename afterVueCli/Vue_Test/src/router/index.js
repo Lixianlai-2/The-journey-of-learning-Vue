@@ -6,6 +6,7 @@ import Message from "../pages/Message.vue";
 import Detail from "../pages/Detail.vue";
 
 const router = new VueRouter({
+  mode: "history",
   routes: [
     {
       name: "guanyu",
@@ -13,6 +14,7 @@ const router = new VueRouter({
       component: About,
       meta: {
         title: "关于",
+        isAuth: true,
       },
     },
     {
@@ -32,6 +34,20 @@ const router = new VueRouter({
             title: "新闻",
           },
           component: News,
+          // beforeEnter: (to, from, next) => {
+          //   if (to.meta.isAuth) {
+          //     // 判断当前路由是否需要进行权限控制
+          //     if (localStorage.school === "qinghua1") {
+          //       // document.title = to.meta.title || "Vue学习";
+          //       next();
+          //     } else {
+          //       alert("学校不对，无法读取");
+          //     }
+          //   } else {
+          //     // document.title = to.meta.title || "Vue学习";
+          //     next();
+          //   }
+          // },
         },
         {
           name: "xiaoxi",
@@ -65,22 +81,22 @@ const router = new VueRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  console.log(to, from);
+// router.beforeEach((to, from, next) => {
+//   console.log(to, from);
 
-  if (to.meta.isAuth) {
-    // 判断当前路由是否需要进行权限控制
-    if (localStorage.school === "qinghua") {
-      // document.title = to.meta.title || "Vue学习";
-      next();
-    } else {
-      alert("学校不对，无法读取");
-    }
-  } else {
-    // document.title = to.meta.title || "Vue学习";
-    next();
-  }
-});
+//   if (to.meta.isAuth) {
+//     // 判断当前路由是否需要进行权限控制
+//     if (localStorage.school === "qinghua") {
+//       // document.title = to.meta.title || "Vue学习";
+//       next();
+//     } else {
+//       alert("学校不对，无法读取");
+//     }
+//   } else {
+//     // document.title = to.meta.title || "Vue学习";
+//     next();
+//   }
+// });
 
 router.afterEach((to) => {
   document.title = to.meta.title || "Vue学习";
