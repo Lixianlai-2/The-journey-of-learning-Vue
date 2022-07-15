@@ -17,7 +17,6 @@ const mutations = {
     state.sum -= value;
   },
 };
-
 // 用于响应组件中的动作
 const actions = {
   jiaOdd(context, value) {
@@ -34,9 +33,19 @@ const actions = {
   },
 };
 
+// 将state中的数据进行加工
+const getters = {
+  bigSum: function (state) {
+    // 注意要return
+    return state.sum * 10;
+  },
+};
+
 export default new Vuex.Store({
   state: state,
   mutations: mutations,
   // 缩写了
   actions,
+  // 配置getters
+  getters,
 });
