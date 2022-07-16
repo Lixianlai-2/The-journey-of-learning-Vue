@@ -9,6 +9,7 @@
       </li>
     </ul>
     <h1 style="color: red">当前Count组件求和为{{ sum }}</h1>
+    <button type="submit"></button>
   </div>
 </template>
 

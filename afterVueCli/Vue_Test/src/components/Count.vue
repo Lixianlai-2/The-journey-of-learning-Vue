@@ -31,8 +31,9 @@ export default {
     };
   },
   computed: {
-    ...mapState(["sum", "subject", "school", "personList"]),
-    ...mapGetters(["bigSum"]),
+    ...mapState("countAbout", ["sum", "subject", "school"]),
+    ...mapState("personAbout", ["personList"]),
+    ...mapGetters("countAbout", ["bigSum"]),
     // school() {
     //   return this.$store.state.school;
     // },
@@ -55,7 +56,7 @@ export default {
     //   this.$store.commit("JIAN", this.n);
     // },
 
-    ...mapMutations({
+    ...mapMutations("countAbout", {
       increment: "JIA",
       decrement: "JIAN",
     }),
@@ -68,7 +69,7 @@ export default {
     // incrementWait() {
     //   this.$store.dispatch("jiaWait", this.n);
     // },
-    ...mapActions({
+    ...mapActions("countAbout", {
       incrementOdd: "jiaOdd",
       incrementWait: "jiaWait",
     }),
